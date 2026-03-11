@@ -113,7 +113,7 @@ func (s *Server) SessionProject() string {
 
 // SetSessionRoot sets the session root path directly (for CLI mode).
 func (s *Server) SetSessionRoot(rootPath string) {
-	go s.checkForUpdate()
+	// Auto update check removed — use `codebase-memory-mcp update` manually
 	s.sessionOnce.Do(func() {
 		s.sessionRoot = rootPath
 		if rootPath != "" {
@@ -126,7 +126,7 @@ func (s *Server) SetSessionRoot(rootPath string) {
 
 // onInitialized is called when the client sends notifications/initialized.
 func (s *Server) onInitialized(ctx context.Context, req *mcp.InitializedRequest) {
-	go s.checkForUpdate()
+	// Auto update check removed — use `codebase-memory-mcp update` manually
 	s.sessionOnce.Do(func() {
 		s.sessionRoot = s.detectSessionRoot(ctx, req.Session)
 		if s.sessionRoot != "" {
@@ -138,7 +138,7 @@ func (s *Server) onInitialized(ctx context.Context, req *mcp.InitializedRequest)
 
 // onRootsChanged re-detects session root if not yet set.
 func (s *Server) onRootsChanged(ctx context.Context, req *mcp.RootsListChangedRequest) {
-	go s.checkForUpdate()
+	// Auto update check removed — use `codebase-memory-mcp update` manually
 	s.sessionOnce.Do(func() {
 		s.sessionRoot = s.detectSessionRoot(ctx, req.Session)
 		if s.sessionRoot != "" {
